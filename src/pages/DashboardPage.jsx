@@ -38,8 +38,16 @@ export default function DashboardPage({ setActiveTab }) {
     loadDashboardData();
   }, [db, mutateCount]);
 
-  if (isLoading || !summary) {
+  if (isLoading) {
     return <LoadingSpinner text="Fetching financial metrics..." />;
+  }
+
+  if (!summary) {
+    return (
+      <div style={{ textAlign: 'center', padding: '40px' }}>
+        <p>No transaction summary available. Please check database connection.</p>
+      </div>
+    );
   }
 
   const formatCurrency = (val) => {

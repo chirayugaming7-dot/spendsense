@@ -15,6 +15,12 @@ export function queryAll(db, sql, params = []) {
   return results;
 }
 
+// Helper to return a single row or null
+export function queryOne(db, sql, params = []) {
+  const rows = queryAll(db, sql, params);
+  return rows.length > 0 ? rows[0] : null;
+}
+
 // Get all categories from DB
 export function getCategories(db) {
   return queryAll(db, `
