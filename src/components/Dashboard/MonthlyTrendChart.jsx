@@ -3,10 +3,21 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function MonthlyTrendChart({ data }) {
-  // Format data: e.g. [{ month: '2026-06', expense: 1200, income: 4850 }]
+  // Format data: e.g. [{ month: '2026-10-21', expense: 120, income: 450 }]
   const chartData = data.map(item => {
+    // If daily format YYYY-MM-DD
+    if (item.month && item.month.length === 10) {
+      const [year, month, day] = item.month.split('-');
+      const date = new Date(year, parseInt(month, 10) - 1, parseInt(day, 10));
+      const label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return {
+        monthLabel: label,
+        Earned: Math.round(item.income),
+        Spent: Math.round(item.expense)
+      };
+    }
     // Convert YYYY-MM to word form
-    const [year, month] = item.month.split('-');
+    const [year, month] = (item.month || '').split('-');
     const date = new Date(year, parseInt(month, 10) - 1, 1);
     const label = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
     return {

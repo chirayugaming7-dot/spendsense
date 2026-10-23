@@ -17,7 +17,7 @@ SpendSense is a modern, privacy-first personal finance tracking application powe
 ### 1. In-Browser SQLite Engine (SQL.js WebAssembly)
 - **Local Relational Ledger**: Executes a complete SQLite database directly inside the browser using WebAssembly for optimal speed and privacy.
 - **SQL Analytical Queries**: Aggregates balances, monthly spending trends, category distributions, and multi-criteria filters natively using SQL.
-- **IndexedDB Snapshot Persistence**: Automatically seeds initial data (August–October 2026) and persists updates to IndexedDB snapshots so your financial records remain available across browser sessions.
+- **IndexedDB Snapshot Persistence**: Automatically seeds initial data (recent active ledger period) and persists updates to IndexedDB snapshots so your financial records remain available across browser sessions.
 
 ### 2. AI Financial Analyst & Assistant (Groq Cloud)
 - **"Ask Your Data" AI Chatbot**: Conversational finance assistant answering ledger questions like *"How much did I spend on Dining in October?"* or *"What was my biggest expense this month?"*.

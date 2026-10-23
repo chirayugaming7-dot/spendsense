@@ -163,10 +163,14 @@ export function getCategoryBreakdown(db, { startDate, endDate, type = 'expense' 
   return queryAll(db, sql, params);
 }
 
-// Monthly spending trend (Line/Bar Chart) with actual SQL aggregates
+// Monthly or daily spending trend (Line/Bar Chart) with actual SQL aggregates
 export function getMonthlyTrend(db, { startDate, endDate } = {}) {
+  const span = queryOne(db, `SELECT COUNT(DISTINCT strftime('%Y-%m', date)) as monthsCount FROM transactions`);
+  const isDaily = span && span.monthsCount <= 1;
+  const groupFormat = isDaily ? '%Y-%m-%d' : '%Y-%m';
+
   let sql = `
-    SELECT strftime('%Y-%m', t.date) as month,
+    SELECT strftime('${groupFormat}', t.date) as month,
            SUM(CASE WHEN t.type = 'expense' THEN t.amount ELSE 0 END) as expense,
            SUM(CASE WHEN t.type = 'income' THEN t.amount ELSE 0 END) as income
     FROM transactions t

@@ -228,25 +228,10 @@ export async function askYourData(question, transactionsList) {
       return `*(Demo local mode)* Based on your SQLite ledger, you have **${foodTrans.length}** transactions under **Food & Dining**. The total spending in this category is **${formatCurrency(total)}**.`;
     }
     
-    if (q.includes('august')) {
-      const augTrans = transactionsList.filter(t => t.date.startsWith('2026-08'));
-      const expenses = augTrans.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
-      const income = augTrans.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
-      return `*(Demo local mode)* In **August 2026**, you spent **${formatCurrency(expenses)}** and earned **${formatCurrency(income)}** across **${augTrans.length}** transactions.`;
-    }
-
-    if (q.includes('september')) {
-      const sepTrans = transactionsList.filter(t => t.date.startsWith('2026-09'));
-      const expenses = sepTrans.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
-      const income = sepTrans.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
-      return `*(Demo local mode)* In **September 2026**, you spent **${formatCurrency(expenses)}** and earned **${formatCurrency(income)}** across **${sepTrans.length}** transactions.`;
-    }
-
-    if (q.includes('october')) {
-      const octTrans = transactionsList.filter(t => t.date.startsWith('2026-10'));
-      const expenses = octTrans.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
-      const income = octTrans.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
-      return `*(Demo local mode)* In **October 2026**, you spent **${formatCurrency(expenses)}** and earned **${formatCurrency(income)}** across **${octTrans.length}** transactions.`;
+    if (q.includes('days') || q.includes('recent') || q.includes('october') || q.includes('week')) {
+      const expenses = transactionsList.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+      const income = transactionsList.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+      return `*(Demo local mode)* Over the last 4 days (Oct 21–24, 2026), you spent **${formatCurrency(expenses)}** and earned **${formatCurrency(income)}** across **${transactionsList.length}** transactions.`;
     }
 
     const expensesTotal = transactionsList.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);

@@ -6,7 +6,7 @@ import { seedDatabase } from './seed';
 
 const DB_NAME = 'spendsense_db';
 const STORE_NAME = 'sqlite_snapshot';
-const DB_KEY = 'spendsense_snapshot_v2';
+const DB_KEY = 'spendsense_snapshot_v3';
 
 // Open IndexedDB connection
 function openIndexedDB() {

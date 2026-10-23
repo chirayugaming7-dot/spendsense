@@ -10,8 +10,8 @@ export default function StatCards({ summary }) {
     }).format(val || 0);
   };
 
-  // Calculate average daily spend assuming August, September, October 2026 data is present (approx 92 days)
-  const avgDailySpend = (summary.totalExpenses || 0) / 92;
+  // Calculate average daily spend across the active 4-day ledger window
+  const avgDailySpend = (summary.totalExpenses || 0) / 4;
 
   const cards = [
     {
@@ -19,14 +19,14 @@ export default function StatCards({ summary }) {
       value: formatCurrency(summary.totalIncome),
       icon: ArrowUpRight,
       iconClass: 'income',
-      subtext: 'August - October 2026'
+      subtext: 'Last 4 Days (Oct 21 - 24, 2026)'
     },
     {
       label: 'Total Spent',
       value: formatCurrency(summary.totalExpenses),
       icon: ArrowDownRight,
       iconClass: 'expense',
-      subtext: 'August - October 2026'
+      subtext: 'Last 4 Days (Oct 21 - 24, 2026)'
     },
     {
       label: 'Net Cashflow',

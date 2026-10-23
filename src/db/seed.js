@@ -33,14 +33,14 @@ export const seedDatabase = (db) => {
 
   // Seed Budgets
   const budgets = [
-    { category_id: getCatId('Food & Dining'), amount: 600 },
-    { category_id: getCatId('Transportation'), amount: 250 },
-    { category_id: getCatId('Shopping'), amount: 400 },
-    { category_id: getCatId('Entertainment'), amount: 200 },
-    { category_id: getCatId('Utilities'), amount: 300 },
-    { category_id: getCatId('Healthcare'), amount: 150 },
-    { category_id: getCatId('Education'), amount: 100 },
-    { category_id: getCatId('Travel'), amount: 500 }
+    { category_id: getCatId('Food & Dining'), amount: 500 },
+    { category_id: getCatId('Transportation'), amount: 200 },
+    { category_id: getCatId('Shopping'), amount: 350 },
+    { category_id: getCatId('Entertainment'), amount: 180 },
+    { category_id: getCatId('Utilities'), amount: 400 },
+    { category_id: getCatId('Healthcare'), amount: 120 },
+    { category_id: getCatId('Education'), amount: 150 },
+    { category_id: getCatId('Travel'), amount: 300 }
   ];
 
   const budgetStmt = db.prepare(`INSERT INTO budgets (category_id, amount) VALUES (?, ?)`);
@@ -49,134 +49,53 @@ export const seedDatabase = (db) => {
   }
   budgetStmt.free();
 
-  // Seed Transactions (August, September, October 2026)
-  // ~80 realistic transactions: expenses & income
+  // Seed Transactions strictly within the last 4 days (October 21 - October 24, 2026)
   const transactions = [
-    // --- AUGUST 2026 ---
-    // Income
-    { amount: 4500, category: 'Utilities', description: 'Monthly Salary', date: '2026-08-01', type: 'income' },
-    { amount: 350, category: 'Education', description: 'Freelance Design Project', date: '2026-08-15', type: 'income' },
+    // --- Day 1: October 21, 2026 ---
+    { amount: 3200, category: 'Utilities', description: 'Bi-Weekly Paycheck', date: '2026-10-21', type: 'income' },
+    { amount: 450, category: 'Education', description: 'Freelance Frontend Consulting', date: '2026-10-21', type: 'income' },
+    { amount: 14.50, category: 'Food & Dining', description: 'Artisan Espresso & Croissant', date: '2026-10-21', type: 'expense' },
+    { amount: 48.75, category: 'Food & Dining', description: "Trader Joe's Grocery Haul", date: '2026-10-21', type: 'expense' },
+    { amount: 32.40, category: 'Food & Dining', description: 'Chipotle Burrito Bowl with Guac', date: '2026-10-21', type: 'expense' },
+    { amount: 45.00, category: 'Transportation', description: 'Shell Gas Station Fill-up', date: '2026-10-21', type: 'expense' },
+    { amount: 18.20, category: 'Transportation', description: 'Uber Ride to Downtown', date: '2026-10-21', type: 'expense' },
+    { amount: 65.00, category: 'Shopping', description: 'Ergonomic Desk Mat & Cable Sleeves', date: '2026-10-21', type: 'expense' },
+    { amount: 125.00, category: 'Utilities', description: 'Monthly High-Speed Fiber Internet', date: '2026-10-21', type: 'expense' },
+    { amount: 28.50, category: 'Healthcare', description: 'CVS Pharmacy Prescription Refill', date: '2026-10-21', type: 'expense' },
 
-    // Food & Dining
-    { amount: 12.50, category: 'Food & Dining', description: 'Morning Coffee & Pastry', date: '2026-08-02', type: 'expense' },
-    { amount: 45.20, category: 'Food & Dining', description: 'Weekly Grocery Run', date: '2026-08-04', type: 'expense' },
-    { amount: 88.00, category: 'Food & Dining', description: 'Dinner with friends', date: '2026-08-06', type: 'expense' },
-    { amount: 15.40, category: 'Food & Dining', description: 'Lunch takeout', date: '2026-08-10', type: 'expense' },
-    { amount: 52.80, category: 'Food & Dining', description: 'Supermarket shopping', date: '2026-08-14', type: 'expense' },
-    { amount: 120.00, category: 'Food & Dining', description: 'Fine Dining Anniversary', date: '2026-08-19', type: 'expense' },
-    { amount: 38.60, category: 'Food & Dining', description: 'Groceries store', date: '2026-08-22', type: 'expense' },
-    { amount: 18.90, category: 'Food & Dining', description: 'Sushi lunch', date: '2026-08-25', type: 'expense' },
-    { amount: 62.10, category: 'Food & Dining', description: 'Weekend groceries', date: '2026-08-28', type: 'expense' },
+    // --- Day 2: October 22, 2026 ---
+    { amount: 9.80, category: 'Food & Dining', description: 'Morning Cold Brew Coffee', date: '2026-10-22', type: 'expense' },
+    { amount: 22.50, category: 'Food & Dining', description: 'Sweetgreen Salad Lunch', date: '2026-10-22', type: 'expense' },
+    { amount: 76.40, category: 'Food & Dining', description: 'Italian Trattoria Dinner with Colleagues', date: '2026-10-22', type: 'expense' },
+    { amount: 35.00, category: 'Transportation', description: 'Metro Transit Card Top-up', date: '2026-10-22', type: 'expense' },
+    { amount: 120.00, category: 'Shopping', description: 'Uniqlo Autumn Waterproof Jacket', date: '2026-10-22', type: 'expense' },
+    { amount: 34.99, category: 'Shopping', description: 'USB-C Fast Charging Hub', date: '2026-10-22', type: 'expense' },
+    { amount: 15.99, category: 'Entertainment', description: 'Netflix Ultra HD Subscription', date: '2026-10-22', type: 'expense' },
+    { amount: 38.00, category: 'Entertainment', description: 'IMAX Cinema Movie Tickets', date: '2026-10-22', type: 'expense' },
+    { amount: 49.00, category: 'Education', description: 'Fullstack React Performance Workshop', date: '2026-10-22', type: 'expense' },
+    { amount: 85.00, category: 'Utilities', description: 'City Water & Sewage Utility', date: '2026-10-22', type: 'expense' },
 
-    // Transportation
-    { amount: 45.00, category: 'Transportation', description: 'Gas station', date: '2026-08-03', type: 'expense' },
-    { amount: 18.50, category: 'Transportation', description: 'Uber ride', date: '2026-08-08', type: 'expense' },
-    { amount: 48.00, category: 'Transportation', description: 'Gas fill-up', date: '2026-08-16', type: 'expense' },
-    { amount: 32.00, category: 'Transportation', description: 'Monthly Train Pass', date: '2026-08-20', type: 'expense' },
-    { amount: 22.40, category: 'Transportation', description: 'Uber to office', date: '2026-08-27', type: 'expense' },
+    // --- Day 3: October 23, 2026 ---
+    { amount: 650, category: 'Education', description: 'API Integration Client Milestone', date: '2026-10-23', type: 'income' },
+    { amount: 16.20, category: 'Food & Dining', description: 'Bagel & Matcha Latte Breakfast', date: '2026-10-23', type: 'expense' },
+    { amount: 62.80, category: 'Food & Dining', description: 'Whole Foods Market Organic Produce', date: '2026-10-23', type: 'expense' },
+    { amount: 110.00, category: 'Food & Dining', description: 'Friday Night Japanese Sushi Feast', date: '2026-10-23', type: 'expense' },
+    { amount: 24.50, category: 'Transportation', description: 'Lyft Ride Home from Dinner', date: '2026-10-23', type: 'expense' },
+    { amount: 89.00, category: 'Shopping', description: 'Wireless Noise-Cancelling Earbuds', date: '2026-10-23', type: 'expense' },
+    { amount: 12.99, category: 'Entertainment', description: 'Spotify Premium Family Plan', date: '2026-10-23', type: 'expense' },
+    { amount: 65.00, category: 'Entertainment', description: 'Live Acoustic Concert Entry Pass', date: '2026-10-23', type: 'expense' },
+    { amount: 180.00, category: 'Travel', description: 'Express Train Weekend Getaway Booking', date: '2026-10-23', type: 'expense' },
+    { amount: 145.00, category: 'Utilities', description: 'Electricity & Renewable Power Grid Bill', date: '2026-10-23', type: 'expense' },
 
-    // Shopping
-    { amount: 110.00, category: 'Shopping', description: 'Summer Jacket', date: '2026-08-05', type: 'expense' },
-    { amount: 24.99, category: 'Shopping', description: 'Phone Case', date: '2026-08-12', type: 'expense' },
-    { amount: 85.00, category: 'Shopping', description: 'Running Shoes', date: '2026-08-18', type: 'expense' },
-    { amount: 45.00, category: 'Shopping', description: 'Books from bookstore', date: '2026-08-24', type: 'expense' },
-
-    // Entertainment
-    { amount: 15.99, category: 'Entertainment', description: 'Netflix Subscription', date: '2026-08-02', type: 'expense' },
-    { amount: 28.00, category: 'Entertainment', description: 'Movie Tickets', date: '2026-08-07', type: 'expense' },
-    { amount: 12.99, category: 'Entertainment', description: 'Spotify Family Plan', date: '2026-08-15', type: 'expense' },
-    { amount: 75.00, category: 'Entertainment', description: 'Concert ticket', date: '2026-08-21', type: 'expense' },
-
-    // Utilities
-    { amount: 115.00, category: 'Utilities', description: 'Electricity Bill', date: '2026-08-05', type: 'expense' },
-    { amount: 65.00, category: 'Utilities', description: 'Internet service', date: '2026-08-08', type: 'expense' },
-    { amount: 45.00, category: 'Utilities', description: 'Water bill', date: '2026-08-10', type: 'expense' },
-
-    // Healthcare
-    { amount: 25.00, category: 'Healthcare', description: 'Pharmacy - Allergy Meds', date: '2026-08-09', type: 'expense' },
-    { amount: 60.00, category: 'Healthcare', description: 'Dentist Clean checkup', date: '2026-08-23', type: 'expense' },
-
-    // Education
-    { amount: 49.00, category: 'Education', description: 'Online Coding Course', date: '2026-08-11', type: 'expense' },
-
-
-    // --- SEPTEMBER 2026 ---
-    // Income
-    { amount: 4500, category: 'Utilities', description: 'Monthly Salary', date: '2026-09-01', type: 'income' },
-    { amount: 420, category: 'Education', description: 'Freelance Programming Consulting', date: '2026-09-18', type: 'income' },
-
-    // Food & Dining
-    { amount: 14.20, category: 'Food & Dining', description: 'Coffee & Donut break', date: '2026-09-02', type: 'expense' },
-    { amount: 56.40, category: 'Food & Dining', description: 'Grocery shopping', date: '2026-09-05', type: 'expense' },
-    { amount: 42.10, category: 'Food & Dining', description: 'Mid-week Groceries', date: '2026-09-12', type: 'expense' },
-    { amount: 95.00, category: 'Food & Dining', description: 'Birthday Dinner party', date: '2026-09-15', type: 'expense' },
-    { amount: 18.50, category: 'Food & Dining', description: 'Fast food lunch', date: '2026-09-19', type: 'expense' },
-    { amount: 68.20, category: 'Food & Dining', description: 'Weekend bulk grocery store', date: '2026-09-23', type: 'expense' },
-    { amount: 34.00, category: 'Food & Dining', description: 'Pizza delivery night', date: '2026-09-26', type: 'expense' },
-    { amount: 72.80, category: 'Food & Dining', description: 'Whole Foods purchase', date: '2026-09-29', type: 'expense' },
-
-    // Transportation
-    { amount: 46.50, category: 'Transportation', description: 'Gas station refill', date: '2026-09-03', type: 'expense' },
-    { amount: 15.00, category: 'Transportation', description: 'City center parking fee', date: '2026-09-10', type: 'expense' },
-    { amount: 49.00, category: 'Transportation', description: 'Gas station refill', date: '2026-09-20', type: 'expense' },
-    { amount: 24.50, category: 'Transportation', description: 'Uber home late night', date: '2026-09-25', type: 'expense' },
-
-    // Shopping
-    { amount: 145.00, category: 'Shopping', description: 'Designer Sunglasses', date: '2026-09-07', type: 'expense' },
-    { amount: 32.00, category: 'Shopping', description: 'T-shirt sale', date: '2026-09-14', type: 'expense' },
-    { amount: 280.00, category: 'Shopping', description: 'Office Chair ergonomic', date: '2026-09-22', type: 'expense' },
-
-    // Entertainment
-    { amount: 15.99, category: 'Entertainment', description: 'Netflix Subscription', date: '2026-09-02', type: 'expense' },
-    { amount: 12.99, category: 'Entertainment', description: 'Spotify Family Plan', date: '2026-09-15', type: 'expense' },
-    { amount: 35.00, category: 'Entertainment', description: 'Video Game purchase', date: '2026-09-17', type: 'expense' },
-    { amount: 45.00, category: 'Entertainment', description: 'Bowling Night with colleagues', date: '2026-09-28', type: 'expense' },
-
-    // Utilities
-    { amount: 145.00, category: 'Utilities', description: 'Electricity Bill (AC heavy)', date: '2026-09-05', type: 'expense' },
-    { amount: 65.00, category: 'Utilities', description: 'Internet service', date: '2026-09-08', type: 'expense' },
-    { amount: 50.00, category: 'Utilities', description: 'Water bill', date: '2026-09-10', type: 'expense' },
-
-    // Healthcare
-    { amount: 15.00, category: 'Healthcare', description: 'Eye Drops pharmacy', date: '2026-09-11', type: 'expense' },
-    { amount: 35.00, category: 'Healthcare', description: 'Physiotherapist co-pay', date: '2026-09-24', type: 'expense' },
-
-    // Travel
-    { amount: 480.00, category: 'Travel', description: 'Flight Tickets - Weekend Getaway', date: '2026-09-10', type: 'expense' },
-    { amount: 240.00, category: 'Travel', description: 'Hotel stay booking', date: '2026-09-12', type: 'expense' },
-    { amount: 95.00, category: 'Travel', description: 'Travel insurance & luggage', date: '2026-09-13', type: 'expense' },
-
-
-    // --- OCTOBER 2026 ---
-    // Income
-    { amount: 4500, category: 'Utilities', description: 'Monthly Salary', date: '2026-10-01', type: 'income' },
-    { amount: 600, category: 'Education', description: 'Freelance UI Work', date: '2026-10-18', type: 'income' },
-
-    // Food & Dining
-    { amount: 11.80, category: 'Food & Dining', description: 'Starbucks coffee run', date: '2026-10-02', type: 'expense' },
-    { amount: 58.90, category: 'Food & Dining', description: 'Groceries supermarket', date: '2026-10-05', type: 'expense' },
-    { amount: 16.50, category: 'Food & Dining', description: 'Salad lunch delivery', date: '2026-10-11', type: 'expense' },
-    { amount: 49.30, category: 'Food & Dining', description: 'Weekly groceries fill', date: '2026-10-16', type: 'expense' },
-    { amount: 112.00, category: 'Food & Dining', description: 'Steakhouse dinner celebration', date: '2026-10-23', type: 'expense' },
-    
-    // Transportation
-    { amount: 48.00, category: 'Transportation', description: 'Gas station', date: '2026-10-07', type: 'expense' },
-    { amount: 21.00, category: 'Transportation', description: 'Train fare cards', date: '2026-10-15', type: 'expense' },
-
-    // Shopping
-    { amount: 89.99, category: 'Shopping', description: 'Mechanical Keyboard', date: '2026-10-09', type: 'expense' },
-    { amount: 15.00, category: 'Shopping', description: 'Notebooks & Pens office supply', date: '2026-10-14', type: 'expense' },
-
-    // Entertainment
-    { amount: 15.99, category: 'Entertainment', description: 'Netflix Subscription', date: '2026-10-02', type: 'expense' },
-    { amount: 12.99, category: 'Entertainment', description: 'Spotify Family Plan', date: '2026-10-20', type: 'expense' },
-
-    // Utilities
-    { amount: 135.00, category: 'Utilities', description: 'Electricity Bill', date: '2026-10-08', type: 'expense' },
-    { amount: 65.00, category: 'Utilities', description: 'Internet service', date: '2026-10-12', type: 'expense' },
-
-    // Healthcare
-    { amount: 45.00, category: 'Healthcare', description: 'Prescription Glasses', date: '2026-10-19', type: 'expense' }
+    // --- Day 4: October 24, 2026 (Today) ---
+    { amount: 11.50, category: 'Food & Dining', description: 'Cold Pressed Green Juice & Muffin', date: '2026-10-24', type: 'expense' },
+    { amount: 28.00, category: 'Food & Dining', description: 'Weekend Brunch with Avocado Toast', date: '2026-10-24', type: 'expense' },
+    { amount: 42.10, category: 'Food & Dining', description: 'Farmers Market Fresh Bakery & Fruit', date: '2026-10-24', type: 'expense' },
+    { amount: 42.00, category: 'Transportation', description: 'Chevron Gas Station Fill-up', date: '2026-10-24', type: 'expense' },
+    { amount: 45.00, category: 'Shopping', description: 'Hardcover Design Book', date: '2026-10-24', type: 'expense' },
+    { amount: 55.00, category: 'Healthcare', description: 'Annual Dental Checkup & Cleaning Copay', date: '2026-10-24', type: 'expense' },
+    { amount: 22.00, category: 'Entertainment', description: 'Board Game Cafe Entry & Snacks', date: '2026-10-24', type: 'expense' },
+    { amount: 95.00, category: 'Travel', description: 'Boutique Hotel Weekend Deposit', date: '2026-10-24', type: 'expense' }
   ];
 
   const transStmt = db.prepare(`
@@ -190,5 +109,5 @@ export const seedDatabase = (db) => {
   }
   transStmt.free();
 
-  console.log(`Seeded ${transactions.length} transactions successfully!`);
+  console.log(`Seeded ${transactions.length} transactions successfully across last 4 days!`);
 };

@@ -33,7 +33,7 @@ export default function AIInsightsPage() {
 
   // Chat chatbot state
   const [messages, setMessages] = useState([
-    { role: 'model', content: "Hello! I am your SpendSense AI Analyst. Ask me anything about your transaction records, such as: 'How much did I spend in September?' or 'What is my highest category?'" }
+    { role: 'model', content: "Hello! I am your SpendSense AI Analyst. Ask me anything about your transaction records, such as: 'How much did I spend over the last 4 days?' or 'What is my highest category?'" }
   ]);
   const [chatInput, setChatInput] = useState('');
   const [isChatLoading, setIsChatLoading] = useState(false);
@@ -289,7 +289,7 @@ export default function AIInsightsPage() {
               <form onSubmit={handleChatSubmit} className="chat-input-bar">
                 <input
                   type="text"
-                  placeholder="e.g. How much did I spend on Food in September?"
+                  placeholder="e.g. How much did I spend on Food over the last 4 days?"
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   disabled={isChatLoading}
@@ -315,7 +315,7 @@ export default function AIInsightsPage() {
             <form onSubmit={handleBulkSubmit}>
               <textarea
                 className="bulk-paste-area"
-                placeholder={`e.g.\nSpent $12 on lunch yesterday\nBought shirts at target for $45.99 on October 10\nMonthly Salary deposit of $4500 on October 1st`}
+                placeholder={`e.g.\nSpent $14 on lunch yesterday\nBought shirts at target for $45.99 on October 22\nFreelance design payment of $350 on October 21`}
                 value={bulkText}
                 onChange={(e) => setBulkText(e.target.value)}
                 disabled={isBulkParsing || !isAiConfigured}
